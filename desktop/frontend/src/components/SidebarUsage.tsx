@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from "react";
+import { providerMeta } from "../agentStatus";
 import { formatTokenCount } from "../agentUsageFormat";
-import { usageRows, type UsageRow } from "../sidebarUsage";
+import { usageRows, USAGE_TOOLS, type UsageRow } from "../sidebarUsage";
 import { useAgentLimits } from "../hooks/useAgentLimits";
 import { useNow } from "../hooks/useNow";
 import { useTokensToday } from "../hooks/useTokensToday";
@@ -100,6 +101,16 @@ export function SidebarUsage({ onOpen }: { onOpen: () => void }) {
     [enabled, limits, stats, now, tools, choice, accounts],
   );
 
+  const waiting = useMemo(
+    () =>
+      enabled
+        ? tools.filter(
+            (tool) => USAGE_TOOLS.includes(tool) && !rows.some((row) => row.provider === tool),
+          )
+        : [],
+    [enabled, tools, rows],
+  );
+
   const clearTimer = () => {
     if (timer.current !== null) {
       window.clearTimeout(timer.current);
@@ -118,10 +129,30 @@ export function SidebarUsage({ onOpen }: { onOpen: () => void }) {
     setHovered(null);
   };
 
-  if (rows.length === 0) return null;
+  if (rows.length === 0 && waiting.length === 0) return null;
 
   return (
     <div className="flex flex-col gap-0.5 px-2 pb-0.5 pt-1">
+      {waiting.map((tool) => {
+        const meta = providerMeta(tool);
+        return (
+          <button
+            type="button"
+            onClick={onOpen}
+            title="Open subscription usage and connection options"
+            key={`waiting:${tool}`}
+            className="flex items-center gap-2 px-3 py-1 text-left text-[11px] text-[var(--text-muted)]"
+          >
+            <span
+              aria-hidden="true"
+              className="h-1.5 w-1.5 shrink-0 rounded-full opacity-50"
+              style={{ backgroundColor: meta.color }}
+            />
+            <span className="min-w-[42px] max-w-[96px] shrink-0 truncate">{meta.short}</span>
+            <span className="ml-auto truncate text-[10px]">Waiting for usage</span>
+          </button>
+        );
+      })}
       {rows.map((row) => {
         const button = (
           <button

@@ -110,6 +110,7 @@ export type View =
   | "terminals"
   | "fleet"
   | "stats"
+  | "spend"
   | "scheduled"
   | "settings"
   | "global-config"

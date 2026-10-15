@@ -30,7 +30,7 @@ fn resolve_lpm_dir(env: Option<std::ffi::OsString>, home: PathBuf) -> PathBuf {
                 None => PathBuf::from(v),
             }
         }
-        None => home.join(".lpm"),
+        None => home.join(".astra-dev-editor"),
     }
 }
 
@@ -3852,10 +3852,10 @@ mod lpm_dir_tests {
     #[test]
     fn defaults_to_dot_lpm_under_home() {
         let home = PathBuf::from("/Users/x");
-        assert_eq!(resolve_lpm_dir(None, home.clone()), home.join(".lpm"));
+        assert_eq!(resolve_lpm_dir(None, home.clone()), home.join(".astra-dev-editor"));
         assert_eq!(
             resolve_lpm_dir(Some("".into()), home.clone()),
-            home.join(".lpm")
+            home.join(".astra-dev-editor")
         );
     }
 

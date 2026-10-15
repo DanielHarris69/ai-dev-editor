@@ -1,3 +1,4 @@
+import { SpendDashboard } from "./components/SpendDashboard";
 import { useEffect, useMemo, useState } from "react";
 import { Sidebar } from "./components/Sidebar";
 import { ProjectColumns } from "./components/ProjectColumns";
@@ -308,6 +309,8 @@ export default function App() {
             isFullscreen={isFullscreen}
             onExpand={() => setSidebarCollapsed(false)}
           />
+          <div className="flex gap-2 py-1 text-xs"><button aria-pressed={view === "projects"} className="rounded-md border border-[var(--border)] px-3 py-1" onClick={() => setView("projects")}>Workspace</button><button aria-pressed={view === "spend"} className="rounded-md border border-[var(--border)] px-3 py-1" onClick={() => setView("spend")}>Spend dashboard</button></div>
+          {view === "spend" && <SpendDashboard />}
           {globalTerminalsVisited && (
             <div
               className={

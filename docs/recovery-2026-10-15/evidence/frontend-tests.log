@@ -1,0 +1,56 @@
+
+> lpm-frontend@0.0.0 test
+> vitest run --maxWorkers=4
+
+
+ RUN  v4.1.10 /Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend
+
+DOMException [AbortError]: The operation was aborted.
+    at Fetch.onAsyncTaskManagerAbort (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/fetch/Fetch.js:546:23)
+    at Object.<anonymous> (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/fetch/Fetch.js:416:101)
+    at AsyncTaskManager.abortAll (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:292:30)
+    at AsyncTaskManager.abort (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:52:21)
+    at DetachedBrowserFrame.abort (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/browser/detached-browser/DetachedBrowserFrame.js:112:58)
+    at DetachedWindowAPI.abort (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/window/DetachedWindowAPI.js:51:35)
+    at teardownWindow (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:331:22)
+    at Object.teardown (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:392:10)
+    at file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/vitest/dist/chunks/base.B6Opl8PE.js:168:65
+    at Traces.$ (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/vitest/dist/chunks/traces.DT5aQ62U.js:142:27)
+DOMException [AbortError]: The operation was aborted.
+    at Fetch.onAsyncTaskManagerAbort (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/fetch/Fetch.js:546:23)
+    at Object.<anonymous> (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/fetch/Fetch.js:416:101)
+    at AsyncTaskManager.abortAll (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:292:30)
+    at AsyncTaskManager.abort (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:52:21)
+    at DetachedBrowserFrame.abort (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/browser/detached-browser/DetachedBrowserFrame.js:112:58)
+    at DetachedWindowAPI.abort (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/window/DetachedWindowAPI.js:51:35)
+    at teardownWindow (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:331:22)
+    at Object.teardown (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:392:10)
+    at file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/vitest/dist/chunks/base.B6Opl8PE.js:168:65
+    at Traces.$ (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/vitest/dist/chunks/traces.DT5aQ62U.js:142:27)
+DOMException [AbortError]: The operation was aborted.
+    at Fetch.onAsyncTaskManagerAbort (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/fetch/Fetch.js:546:23)
+    at Object.<anonymous> (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/fetch/Fetch.js:416:101)
+    at AsyncTaskManager.abortAll (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:292:30)
+    at AsyncTaskManager.abort (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:52:21)
+    at DetachedBrowserFrame.abort (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/browser/detached-browser/DetachedBrowserFrame.js:112:58)
+    at DetachedWindowAPI.abort (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/window/DetachedWindowAPI.js:51:35)
+    at teardownWindow (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:331:22)
+    at Object.teardown (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:392:10)
+    at file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/vitest/dist/chunks/base.B6Opl8PE.js:168:65
+    at Traces.$ (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/vitest/dist/chunks/traces.DT5aQ62U.js:142:27)
+DOMException [AbortError]: The operation was aborted.
+    at Fetch.onAsyncTaskManagerAbort (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/fetch/Fetch.js:546:23)
+    at Object.<anonymous> (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/fetch/Fetch.js:416:101)
+    at AsyncTaskManager.abortAll (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:292:30)
+    at AsyncTaskManager.abort (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/async-task-manager/AsyncTaskManager.js:52:21)
+    at DetachedBrowserFrame.abort (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/browser/detached-browser/DetachedBrowserFrame.js:112:58)
+    at DetachedWindowAPI.abort (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/happy-dom/lib/window/DetachedWindowAPI.js:51:35)
+    at teardownWindow (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:331:22)
+    at Object.teardown (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/vitest/dist/chunks/index.DC7d2Pf8.js:392:10)
+    at file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/vitest/dist/chunks/base.B6Opl8PE.js:168:65
+    at Traces.$ (file:///Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/node_modules/vitest/dist/chunks/traces.DT5aQ62U.js:142:27)
+
+ Test Files  303 passed (303)
+      Tests  3358 passed (3358)
+   Start at  21:46:37
+   Duration  18.28s (transform 5.57s, setup 1.15s, import 15.64s, tests 6.60s, environment 14.26s)

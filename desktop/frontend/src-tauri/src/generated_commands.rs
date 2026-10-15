@@ -12,6 +12,8 @@ use serde_json::Value;
 macro_rules! all_command_handlers {
     () => {
         tauri::generate_handler![
+            api_spend_summary, api_spend_proxy_info, api_spend_series,
+            list_providers, save_provider, remove_provider, provider_readiness,
             ack_terminal_data,
             agent_limits,
             claude_limits_account,

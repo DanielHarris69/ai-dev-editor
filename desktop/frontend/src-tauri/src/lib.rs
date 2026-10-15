@@ -1,3 +1,9 @@
+mod spend;
+mod spend_proxy;
+mod providers;
+mod provider_connectors;
+use providers::{list_providers, provider_readiness, save_provider, remove_provider};
+use spend::{api_spend_summary, api_spend_proxy_info, api_spend_series};
 mod actions;
 mod adopt;
 mod agent_last_answer;
@@ -341,6 +347,7 @@ pub fn uninstall_and_exit() -> ! {
 // above must stay above this line.
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    std::env::set_var(config::DIR_ENV, config::lpm_dir());
     #[cfg(target_os = "linux")]
     webengine::prepare_linux_env();
 
@@ -414,6 +421,10 @@ pub fn run() {
         .setup(|app| {
             firstlaunch::seed_global_actions();
             let handle = app.handle().clone();
+            let spend = spend::SpendState::open(config::lpm_dir().join("api-spend.db"))
+                .map_err(std::io::Error::other)?;
+            spend_proxy::start(spend.clone());
+            app.manage(spend);
             lesson::start(handle.clone());
             #[cfg(target_os = "macos")]
             if let Err(e) = menu::build_and_set(&handle) {
@@ -488,7 +499,8 @@ pub fn run() {
             // A lesson recording runs on a throwaway data directory and has to
             // leave the rest of the machine alone: nothing below that writes into
             // the user's own Claude/Codex setup, CLI symlink or tmux runs there.
-            let chores = !lesson::active();
+            // This derivative keeps the existing LPM CLI, hooks and skills installed.
+            let chores = false;
 
             // Install agent status hooks (Claude Code / Codex) so they report to
             // the socket. Backgrounded — touches files, never blocks startup.

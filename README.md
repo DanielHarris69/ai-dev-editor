@@ -1,3 +1,11 @@
+> Current customisation status: [15 October recovery checkpoint](docs/recovery-2026-10-15/README.md).
+
+# Astra Dev Editor
+
+Local LPM derivative with a Terminal/IDE workspace choice and multi-provider SQLite spend ledger. Start at [the MVP guide](docs/astra-mvp/README.md) for launch instructions, integration contracts and verified scope.
+
+---
+
 # lpm — Switch between projects and terminals in seconds
 
 <p align="center">

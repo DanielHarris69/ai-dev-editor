@@ -844,6 +844,18 @@ export function SetOpenAIKey(key) {
 export function HasOpenAIKey() {
   return invoke("has_openai_key", {});
 }
+export function ListProviders() {
+  return invoke("list_providers", {});
+}
+export function SaveProvider(record, credential) {
+  return invoke("save_provider", { record, credential });
+}
+export function RemoveProvider(id) {
+  return invoke("remove_provider", { id });
+}
+export function ProviderReadiness() {
+  return invoke("provider_readiness", {});
+}
 export function ClearOpenAIKey() {
   return invoke("clear_openai_key", {});
 }

@@ -1,0 +1,8 @@
+{
+  "legacy_demo_upgrade_and_backup": "passed",
+  "startup": "passed",
+  "schema": "passed",
+  "unauthenticated_write": "rejected",
+  "occupied_port_app_survives": "passed",
+  "existing_lpm_cli_unchanged": true
+}

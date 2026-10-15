@@ -1,0 +1,20 @@
+{
+  "desktop/frontend/src-tauri/Cargo.lock": "9bb61ea9478b29966cffb61c90cdc7fe2d551b320c7c2f3cb37af981f982d4a3",
+  "desktop/frontend/src-tauri/Cargo.toml": "abe1ed396cedde5141fe874229130d7eeb8d92f2885540d55c13644308c9d43f",
+  "desktop/frontend/src-tauri/src/config.rs": "5f6c2c0d992d3a6325372f3de084f7e234e985f377ff05a475ad1e96b5782db6",
+  "desktop/frontend/src-tauri/src/generated_commands.rs": "00ecfa1f581a74f774f923532b7beaa5b3b8506ba71b2297a06e37dfd65f310a",
+  "desktop/frontend/src-tauri/src/lib.rs": "03aab59bf99575e6e7be85821c8e217f284a6c11060517e1a7b8d852534a40d0",
+  "desktop/frontend/src-tauri/src/spend.rs": "f466724bf34da538f9c8f941a78b738a21eb21ca84faf3905011678109e7474f",
+  "desktop/frontend/src-tauri/src/spend_proxy.rs": "bef856ac48c8d26383632ab88ff6cc234e74026c74f371c6f6b4a60ec7aa963d",
+  "desktop/frontend/src-tauri/src/updates.rs": "b30ba8a5a464592b717cc7de19ce57280980ecbcd25fbd68143ea28e8007b80d",
+  "desktop/frontend/src-tauri/tauri.conf.json": "8d36365374d039d6fe2f4660843cff92749a618c21b61bc790bf87c358a8fc82",
+  "desktop/frontend/src/App.tsx": "4059e307253f01a0a4359f07170080d0ec918bdf689ff0d51482cee4905fd85d",
+  "desktop/frontend/src/components/ProjectDetail.tsx": "680415b4251010c0c498f6ea5485566c7f6fd9eec414d8b348ce435a3d16fb44",
+  "desktop/frontend/src/components/SpendDashboard.test.tsx": "6080de3bda16d3823829343c2977804e33f4b8d2f49193d2ea33e054fc48929b",
+  "desktop/frontend/src/components/SpendDashboard.tsx": "c752225a5b59f3997c169689a49046abfb2ef1f0d468686a15a927efd55f5883",
+  "desktop/frontend/src/components/WorkspaceMode.tsx": "51b52c8754013dd256f5b82799e478cc4f73ea057f1d4bc22378630196ff7eee",
+  "desktop/frontend/src/hooks/useDetailView.ts": "9124a16dfeb974862ce2b7f74d0649ccd08d214e72db6e93325d88e2289c0615",
+  "desktop/frontend/src/store/app.ts": "2982d045a84b6877652c96816e73f755eef49dbe343c78906659f7b49bcfc00d",
+  "examples/welcome.ts": "71add13cc4c27225b91b3d32aecc7b686ee158af55a1890d1ad558352e31671a",
+  "scripts/astra-dev.mjs": "c554f0753c44806882698da400f4602b950a3fdb5ef0940a511a063e6aefcce6"
+}

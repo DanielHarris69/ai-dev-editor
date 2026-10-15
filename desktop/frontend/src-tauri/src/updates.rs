@@ -75,6 +75,7 @@ fn go_arch() -> &'static str {
 
 /// version.Newer: compare up to 3 dot-separated integer parts.
 fn newer(latest: &str, current: &str) -> bool {
+    if current.contains("astra") { return false; }
     fn parse(v: &str) -> [i64; 3] {
         let mut p = [0i64; 3];
         for (i, s) in v.splitn(3, '.').enumerate() {
@@ -157,6 +158,10 @@ fn run_off_worker<T: Send + 'static>(
 }
 
 fn do_check(state: &UpdateState) -> Result<UpdateInfo, String> {
+    let current = current_version();
+    if current.contains("astra") {
+        return Ok(UpdateInfo { current_version: current.clone(), latest_version: current, update_avail: false, download_url: None });
+    }
     let body = run_off_worker(|| {
         let client = reqwest::blocking::Client::builder()
             .timeout(Duration::from_secs(30))

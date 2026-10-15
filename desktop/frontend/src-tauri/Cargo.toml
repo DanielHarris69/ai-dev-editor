@@ -19,6 +19,8 @@ cc = "1"
 embed-resource = "3"
 
 [dependencies]
+axum = "0.8"
+tokio = { version = "1", features = ["net", "rt", "time", "sync"] }
 tauri = { version = "2", features = ["unstable"] }  # unstable = multiwebview (in-pane browser)
 tauri-plugin-opener = "2"
 serde = { version = "1", features = ["derive"] }
@@ -93,12 +95,12 @@ objc2-foundation = { version = "0.3", features = ["NSString"] }
 security-framework-sys = "2.17"
 core-foundation = "0.10"
 core-foundation-sys = "0.8"
-reqwest = { version = "0.13", default-features = false, features = ["blocking", "default-tls"] }
+reqwest = { version = "0.13", default-features = false, features = ["blocking", "default-tls", "json"] }
 
 # Linux host build. No Security.framework, so TLS comes from rustls rather than
 # OpenSSL — keeps the build free of libssl-dev on minimal server images.
 [target.'cfg(not(target_os = "macos"))'.dependencies]
-reqwest = { version = "0.13", default-features = false, features = ["blocking", "rustls"] }
+reqwest = { version = "0.13", default-features = false, features = ["blocking", "rustls", "json"] }
 # Linux/Windows have no Dock to bring a hidden main window back, so a second
 # launch hands off to the running instance, which shows its window.
 tauri-plugin-single-instance = "2"

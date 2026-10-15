@@ -87,6 +87,7 @@ import { modalInputClass, modalInputDefaults } from "../forms/styles";
 import { SettingsSearch } from "./SettingsSearch";
 import { SettingsSelect } from "./SettingsSelect";
 import { OpenAIKeyRow, OpenAIVoiceRow } from "./OpenAITTSRows";
+import { ProviderSettings } from "./ProviderSettings";
 import {
   buildSearchEntries,
   matchSettings,
@@ -976,6 +977,14 @@ export function Settings({
                   <button onClick={() => BrowserOpenURL("https://voicetotext.cc")} className={BTN_SECONDARY}>Learn more</button>
                 </SettingsRow>
               )}
+            </SettingsSection>
+
+            <SettingsSection
+              id="ai.providers"
+              title="Spend providers"
+              description="Add the subscriptions and accounts that should appear on the spend dashboard."
+            >
+              <ProviderSettings />
             </SettingsSection>
 
             <SettingsSection

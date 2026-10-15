@@ -1,0 +1,62 @@
+import { chromium } from 'playwright';
+const browser = await chromium.launch({headless:true,executablePath:"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"});
+const page = await browser.newPage({viewport:{width:1200,height:1100}});
+const errors=[]; page.on('pageerror',e=>errors.push(e.stack));
+await page.addInitScript(() => {
+  window.__LPM_PLATFORM__='macos'; window.__mockCalls = []; let counter=1; const callbacks={};
+  let rows=[];
+  const project={name:'Welcome',root:'/fixture',session:'Welcome',running:false,services:[],allServices:[],actions:[],profiles:[],activeProfile:'',statusEntries:[],isRemote:false};
+  window.__TAURI_INTERNALS__={metadata:{currentWindow:{label:'main'},currentWebview:{label:'main'}},
+    transformCallback:fn=>{const id=counter++;callbacks[id]=fn;return id;},unregisterCallback:id=>delete callbacks[id],
+    convertFileSrc:path=>path,
+    invoke:async (cmd,args={})=>{
+      window.__mockCalls.push(cmd);
+      if(cmd==='load_settings')return {theme:'dark',lastSelectedProject:'Welcome',composerOpen:false,filesTreeSide:'left'};
+      if(cmd==='load_groups')return {groups:[]};
+      if(cmd==='load_terminals')return {projects:{Welcome:{detailView:'ide'}}};
+      if(cmd==='list_projects')return [project];
+      if(cmd==='get_project')return project;
+      if(['read_config','read_repo_config','read_global_config'].includes(cmd))return '';
+      if(cmd==='list_branches')return ['main'];
+      if(cmd==='load_work_statuses')return {statuses:[]};
+      if(cmd==='git_changed_files')return [];
+      if(cmd==='peer_state')return {peers:[]};
+      if(cmd==='agent_limits')return {};
+      if(cmd==='api_spend_summary')return rows;
+      if(cmd==='api_spend_proxy_info')return {url:'http://127.0.0.1:4000',token:'fixture-token',status:'listening'};
+      if(cmd==='read_project_file')return {content:'export const welcome = "Hello Astra";\n',size:40,writable:true};
+      if(cmd==='list_dir_entries')return [{name:'welcome.ts',path:'welcome.ts',isDir:false}];
+      if(cmd==='check_for_update')return {currentVersion:'0.1.0-astra',latestVersion:'0.1.0-astra',updateAvail:false};
+      if(cmd==='git_status')return {files:[],branch:'main'};
+      if(cmd==='list_agent_capabilities')return [];
+      if(cmd==='list_accounts')return [];
+      if(cmd==='load_message_history')return [];
+      if(cmd==='plugin:event|listen')return counter++;
+      if(cmd.startsWith('plugin:window|'))return false;
+      if(cmd==='get_follow_state')return {follows:[]};
+      if(cmd==='git_info')return {branch:'main',branches:['main'],changedFiles:[],isGitRepo:true};
+      return [];
+    }};
+  window.__TAURI_EVENT_PLUGIN_INTERNALS__={unregisterListener:()=>{}};
+});
+await page.goto('http://127.0.0.1:9255');
+await page.getByRole('button',{name:'Spend dashboard',exact:true}).click();
+await page.getByRole('heading',{name:'Spend',exact:true}).waitFor();
+await page.getByRole('button',{name:'Workspace',exact:true}).click();
+await page.getByRole('button',{name:'IDE / Files',exact:true}).waitFor();
+await page.getByText('welcome.ts',{exact:true}).click();
+await page.locator('.monaco-editor').waitFor();
+await page.waitForFunction(()=>document.querySelector('.view-lines')?.textContent.includes('Hello'));
+await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
+await page.evaluate(async()=>{const {setupMonaco}=await import('/src/monaco-setup.ts');const editor=setupMonaco().editor.getEditors()[0];const model=editor.getModel();editor.setPosition({lineNumber:model.getLineCount(),column:model.getLineMaxColumn(model.getLineCount())});editor.focus();});
+await page.keyboard.type('// draft survives mode switch');
+await page.waitForFunction(()=>document.querySelector('.view-lines')?.textContent.includes('survives'));
+await page.getByRole('button',{name:'Terminal',exact:true}).click();
+await page.getByRole('button',{name:'IDE / Files',exact:true}).click();
+await page.waitForFunction(()=>document.querySelector('.view-lines')?.textContent.includes('survives'));
+await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
+await page.waitForFunction(async()=>{const {setupMonaco}=await import('/src/monaco-setup.ts');return setupMonaco().editor.getEditors()[0].getLayoutInfo().width>400;});
+await page.screenshot({path:'/Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/docs/astra-mvp/ide-fixture.png',fullPage:true});
+console.log(JSON.stringify({errors,calls:await page.evaluate(()=>[...new Set(window.__mockCalls)]),body:(await page.locator('body').innerText()).slice(-1200)}));
+await browser.close();
+if(errors.length)process.exitCode=1;

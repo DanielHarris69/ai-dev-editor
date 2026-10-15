@@ -364,6 +364,9 @@ fn slot_codex_window(limits: &mut ProviderLimits, minutes: i64, window: LimitWin
 /// window. `now`/`updated_at` are injected for testability.
 fn parse_codex_line(line: &str, now: i64, updated_at: i64) -> Option<ProviderLimits> {
     let v: Value = serde_json::from_str(line).ok()?;
+    let updated_at = v.get("timestamp").and_then(Value::as_str)
+        .and_then(|t| chrono::DateTime::parse_from_rfc3339(t).ok())
+        .map(|t| t.timestamp_millis()).unwrap_or(updated_at);
     let rl = v.get("payload")?.get("rate_limits")?;
     if rl.is_null() {
         return None;
@@ -733,6 +736,23 @@ mod tests {
         let line = r#"{"payload":{"rate_limits":{"primary":{"used_percent":1.0,"window_minutes":300,"resets_in_seconds":60}}}}"#;
         let l = parse_codex_line(line, 1_000, 0).unwrap();
         assert_eq!(l.five_hour.unwrap().resets_at, 1_060);
+    }
+
+    #[test]
+    #[ignore = "requires a local Codex rollout"]
+    fn installed_codex_limits_smoke() {
+        let path=std::env::var("ASTRA_TEST_CODEX_ROLLOUT").unwrap();
+        let limits=parse_codex_file(Path::new(&path),now_secs(),now_millis()).unwrap();
+        assert_eq!(limits.provider,"codex");
+        assert!(limits.weekly.is_some() || limits.five_hour.is_some());
+        println!("Codex local usage: weekly={:?}, five_hour={:?}, report_time={}",limits.weekly.as_ref().map(|w|(w.used_percent,w.resets_at)),limits.five_hour.as_ref().map(|w|(w.used_percent,w.resets_at)),limits.updated_at);
+    }
+
+    #[test]
+    fn codex_report_timestamp_preserves_staleness() {
+        let line=r#"{"timestamp":"2026-10-09T00:00:00Z","payload":{"rate_limits":{"primary":{"used_percent":66,"window_minutes":10080,"resets_at":1791980680}}}}"#;
+        let parsed=parse_codex_line(line,0,9999999999999).unwrap();
+        assert_eq!(parsed.updated_at,1791504000000);
     }
 
     #[test]

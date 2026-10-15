@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-15",
+  "version": "0.3.0-astra",
+  "branch": "codex/ai-dev-editor-mvp",
+  "binary": "/Users/danharrtis-work/ai_santuary/projects/ai_dev_editor/desktop/frontend/src-tauri/target/release/bundle/macos/Astra Dev Editor.app/Contents/MacOS/lpm-desktop",
+  "sha256": "b4419c3388c1b3d0108b2821dc8607376ca19ce8d24103d59265a63a1a3f2d19",
+  "signed": false,
+  "tests": {
+    "frontend": 3358,
+    "rust": 1538,
+    "keychain": 1,
+    "windows_cross_check": "passed",
+    "native_smoke": "passed",
+    "browser_fixture": "passed"
+  },
+  "provider_live_collection": "not implemented; explicitly deferred"
+}

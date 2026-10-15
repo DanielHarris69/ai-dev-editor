@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { getProjectTerminals, saveProjectTerminals } from "../terminals";
 import { useKeyboardShortcut } from "./useKeyboardShortcut";
 
-export type DetailView = "terminal" | "config" | "notes" | "ai";
+export type DetailView = "terminal" | "ide" | "config" | "notes" | "ai";
 
 export interface UseDetailViewOptions {
   projectName: string;
@@ -23,10 +23,10 @@ export function useDetailView({
   visible,
   keysActive,
 }: UseDetailViewOptions): UseDetailViewResult {
-  const [detailView, setDetailView] = useState<DetailView>("terminal");
+  const [detailView, setDetailView] = useState<DetailView>(() => getProjectTerminals(projectName).detailView === "ide" ? "ide" : "terminal");
 
   useEffect(() => {
-    if (!visible && detailView !== "terminal") setDetailView("terminal");
+    if (!visible && detailView !== "terminal" && detailView !== "ide") setDetailView("terminal");
   }, [visible, detailView]);
 
   const switchDetailView = useCallback(

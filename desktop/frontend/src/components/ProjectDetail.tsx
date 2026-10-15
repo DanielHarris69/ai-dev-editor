@@ -1,3 +1,5 @@
+import { FilesPane } from "./files/FilesPane";
+import { WorkspaceMode } from "./WorkspaceMode";
 import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import { toast } from "sonner";
 import { ActionsDnd } from "./ActionsDnd";
@@ -823,10 +825,12 @@ export function ProjectDetail({
           <SyncedBar follow={follow} macName={peerAlias(peerState.peers, follow.slug)} />
         )}
 
+        <WorkspaceMode mode={detailView} onChange={switchDetailView} />
+        <div className={detailView === "ide" ? "min-h-0 flex-1 overflow-hidden rounded-lg border border-[var(--border)]" : "hidden"}><FilesPane tabId={`ide-${project.name}`} paneId={`ide-${project.name}`} projectRoot={project.root} projectName={project.name} active={visible && detailView === "ide"} focused={visible && focused && detailView === "ide"} /></div>
         <TerminalPane
           active={detailView === "terminal"}
           visible={visible}
-          keysActive={focused}
+          keysActive={focused && detailView === "terminal"}
           showEmptyState={showEmptyState}
           onNewTerminal={handleNewTerminal}
           onEditConfig={() => switchDetailView("config")}

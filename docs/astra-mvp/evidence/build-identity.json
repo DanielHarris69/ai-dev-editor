@@ -1,0 +1,9 @@
+{
+  "upstream_commit": "32081e66572dae5d54fb15513ebe913fd53c90b9",
+  "branch": "codex/ai-dev-editor-mvp",
+  "binary_sha256": "ba8fe742c06796ad434651f3783782d7f0ccb597e6a9f4a3c964502c08cf63ba",
+  "binary_bytes": 38796944,
+  "code_committed": false,
+  "code_pushed": false,
+  "signed": false
+}

@@ -19,3 +19,7 @@ prompts.superpowers/
 lpm.cx-Performance-*
 .playwright-cli/
 
+
+# Local Python verification caches
+__pycache__/
+*.pyc

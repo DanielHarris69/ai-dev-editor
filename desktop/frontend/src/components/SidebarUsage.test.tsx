@@ -99,6 +99,16 @@ afterEach(() => {
 });
 
 describe("SidebarUsage", () => {
+  it("opens connection options from an empty subscription row", async () => {
+    mocks.agentLimits.mockResolvedValue({});
+    const onOpen = vi.fn();
+    await render(onOpen);
+    const button = container.querySelector('button[title="Open subscription usage and connection options"]') as HTMLButtonElement;
+    expect(button).not.toBeNull();
+    await act(async () => button.click());
+    expect(onOpen).toHaveBeenCalledOnce();
+  });
+
   it("shows when each tool's window comes back", async () => {
     await render();
 
@@ -143,7 +153,7 @@ describe("SidebarUsage", () => {
     });
     await render();
 
-    const rows = [...container.querySelectorAll("button")];
+    const rows = [...container.querySelectorAll('button:not([title="Open subscription usage and connection options"])')];
     expect(rows).toHaveLength(2);
     expect(rows[0].textContent).toContain("Work");
     expect(rows[0].textContent).toContain("91%");
@@ -165,7 +175,7 @@ describe("SidebarUsage", () => {
     mocks.agentUsageStats.mockResolvedValue(usage(2_000_000));
     await render();
 
-    const rows = [...container.querySelectorAll("button")];
+    const rows = [...container.querySelectorAll('button:not([title="Open subscription usage and connection options"])')];
     expect(rows).toHaveLength(1);
     expect(rows[0].textContent).toContain("2.0M today");
   });
@@ -225,10 +235,21 @@ describe("SidebarUsage", () => {
     expect(mocks.agentUsageStats).not.toHaveBeenCalled();
   });
 
-  it("renders nothing when no tool has reported anything", async () => {
+  it("shows a waiting row for each enabled tool that has not reported yet", async () => {
     mocks.agentLimits.mockResolvedValue({});
     await render();
 
-    expect(container.textContent).toBe("");
+    expect(container.textContent).toContain("Claude");
+    expect(container.textContent).toContain("Codex");
+    expect(container.textContent).toContain("Waiting for usage");
+  });
+
+  it("keeps a disabled tool out even when it has not reported", async () => {
+    mocks.agentLimits.mockResolvedValue({});
+    useSettingsStore.setState({ usageSidebarTools: ["claude"] });
+    await render();
+
+    expect(container.textContent).toContain("Claude");
+    expect(container.textContent).not.toContain("Codex");
   });
 });
